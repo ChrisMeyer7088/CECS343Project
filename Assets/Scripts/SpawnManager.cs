@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllyManager : MonoBehaviour {
+public class SpawnManager : MonoBehaviour {
 
 	//public PlayerHealth playerHealth;       // Reference to the player's heatlh.
-	public GameObject ally;                // The enemy prefab to be spawned.
+	public GameObject spawnObject;                // The enemy prefab to be spawned.
 	public float spawnTime = 3f;            // How long between each spawn. 3 seconds in this case
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 
 
-	void Start ()
+	/*void Start ()
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
-		InvokeRepeating ("Spawn", spawnTime, spawnTime);
+		//InvokeRepeating ("Spawn", spawnTime, spawnTime);
+	}*/
+
+	void Update()
+	{
+		float rand = Random.Range (0, 100);
+		if (rand = 1) {
+			spawnTime = rand;
+			InvokeRepeating ("Spawn", spawnTime, spawnTime);
+		}
+			
 	}
 
 
@@ -25,7 +35,7 @@ public class AllyManager : MonoBehaviour {
 			// ... exit the function.
 			return;
 		}*/
-
+			
 		//Find a random index between zero and one less than the number of spawn points.
 		int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 		//ally.transform.rotation = Quaternion.Euler( 0, Random.Range(0, 360), 0 );
@@ -35,7 +45,7 @@ public class AllyManager : MonoBehaviour {
 		this.gameObject.transform.localScale.x = -flip; have to find type of variable*/
 
 		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-		Instantiate (ally, spawnPoints[spawnPointIndex].position, ally.transform.rotation);
+		Instantiate (spawnObject, spawnPoints[spawnPointIndex].position, spawnObject.transform.rotation);
 
 	}
 }
