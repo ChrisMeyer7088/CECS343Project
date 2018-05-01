@@ -79,24 +79,25 @@ namespace Team343.CharacterSystem
         {
             // Determine If On wall or ceiling
             float dot = Vector3.Dot(Vector3.up, currentSurfaceNormal);
-            //Debug.Log(dot);
-            bool onCeiling = (dot <= 0);
+            bool onCeiling = (dot <=  -.128);
 
             bool onWall = (Mathf.Abs(dot) <= 0.7); //or 0.7
             if(onWall)
             {
                 //Debug.Log(onWall);
             }
-            
-            if (direction.x < 0)
-            {
-                //transform.localScale = new Vector2((onCeiling) ? 1 : -1, transform.localScale.y);
+
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
                 transform.localScale = new Vector2(-1, transform.localScale.y);
-            }
-            else if (direction.x > 0)
-            {
+            else if(Input.GetKeyDown(KeyCode.RightArrow))
                 transform.localScale = new Vector2(1, transform.localScale.y);
-            }
+            else if(direction.x < 0 )
+                transform.localScale = new Vector2(onCeiling? 1:-1, transform.localScale.y);
+            else
+                transform.localScale = new Vector2(onCeiling? -1:1, transform.localScale.y);
+
+
             transform.position = transform.position + direction * speed * Time.deltaTime;
         }
 
@@ -117,7 +118,6 @@ namespace Team343.CharacterSystem
 
         protected virtual void TransitionStates(CharacterState nextState)
         {
-            Debug.Log("TRANSITIONING TO: " + nextState);
             CurrentState = nextState;
             IsTransitoningState = true;
         }
