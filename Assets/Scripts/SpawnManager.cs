@@ -18,10 +18,10 @@ public class SpawnManager : MonoBehaviour {
 
 	void Update()
 	{
-		float rand = Random.Range (0, 100);
-		if (rand = 1) {
+		float rand = Random.Range (0, 5000);
+		if (rand == 1) {
 			spawnTime = rand;
-			InvokeRepeating ("Spawn", spawnTime, spawnTime);
+			Spawn ();
 		}
 			
 	}

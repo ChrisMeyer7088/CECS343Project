@@ -22,7 +22,7 @@ public class DisplayWin : MonoBehaviour {
 
 	IEnumerator WaitForSec()
 	{
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (4);
 
 		Application.LoadLevel (1);
 	}
