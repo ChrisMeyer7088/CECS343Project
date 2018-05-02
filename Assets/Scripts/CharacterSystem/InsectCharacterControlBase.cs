@@ -29,7 +29,7 @@ namespace Team343.CharacterSystem
             Default,
             Falling
         }
-        protected bool IsTransitoningState = true;
+        public bool IsTransitoningState = true;
 
         protected Vector2 currentSurfaceNormal;
 
