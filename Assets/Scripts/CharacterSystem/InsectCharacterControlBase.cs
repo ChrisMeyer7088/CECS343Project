@@ -63,7 +63,7 @@ using UnityEngine;
                         rigidbody.velocity = Vector3.zero;
                         rigidbody.angularVelocity = 0f;
                         rigidbody.isKinematic = false;
-                        IsTransitoningState = true;
+                        IsTransitoningState = false;
                     }
                     // Rotate to default while falling.
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.1f);
