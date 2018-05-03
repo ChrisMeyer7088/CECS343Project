@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Team343.CharacterSystem
-{
+//namespace Team343.CharacterSystem
+//{
     public abstract class InsectCharacterControlBase : MonoBehaviour
     {
         [SerializeField]
@@ -29,7 +29,7 @@ namespace Team343.CharacterSystem
             Default,
             Falling
         }
-        protected bool IsTransitoningState = true;
+        public bool IsTransitoningState = true;
 
         protected Vector2 currentSurfaceNormal;
 
@@ -63,7 +63,7 @@ namespace Team343.CharacterSystem
                         rigidbody.velocity = Vector3.zero;
                         rigidbody.angularVelocity = 0f;
                         rigidbody.isKinematic = false;
-                        IsTransitoningState = false;
+                        IsTransitoningState = true;
                     }
                     // Rotate to default while falling.
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.1f);
@@ -169,4 +169,4 @@ namespace Team343.CharacterSystem
         }
         #endregion
     }
-}
+//}

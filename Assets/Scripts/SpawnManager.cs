@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour {
 
 	void Update()
 	{
-		float rand = Random.Range (0, 1000);
+		float rand = Random.Range (0, 100);
 		if (rand == 1) {
 			spawnTime = rand;
 			Spawn ();
