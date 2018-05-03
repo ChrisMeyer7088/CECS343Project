@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject PlayerAnimator;
     [SerializeField]
     private Rigidbody2D PlayerRigidbody;
-    [SerializeField] private float Speed = 5f;
+    [SerializeField] private float Speed = 5.0f;
     float Xscale;
     [Header("Raycasting")]
     public Transform RaycastPoint;
@@ -162,5 +162,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     #endregion
-
 }

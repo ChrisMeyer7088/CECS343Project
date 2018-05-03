@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Team343.CharacterSystem
-{
+//namespace Team343.CharacterSystem
+//{
     public abstract class InsectCharacterControlBase : MonoBehaviour
     {
         [SerializeField]
@@ -13,7 +13,7 @@ namespace Team343.CharacterSystem
         [SerializeField]
         protected Rigidbody2D rigidbody;
         [SerializeField]
-        private float speed = 5f;
+        public float speed = 5f;
         float Xscale;
 
         [Header("Raycasting")]
@@ -168,5 +168,6 @@ namespace Team343.CharacterSystem
             }
         }
         #endregion
+
     }
-}
+//}

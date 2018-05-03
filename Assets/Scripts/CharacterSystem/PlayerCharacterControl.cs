@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Team343.CharacterSystem
-{
+//namespace Team343.CharacterSystem
+//{
     public class PlayerCharacterControl : InsectCharacterControlBase
     {
         protected override void DefaultUpdate()
@@ -38,4 +38,4 @@ namespace Team343.CharacterSystem
             }
         }
     }
-}
+//}
