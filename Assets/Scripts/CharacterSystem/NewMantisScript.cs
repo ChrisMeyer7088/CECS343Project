@@ -44,8 +44,12 @@ public class NewMantisScript : MonoBehaviour {
     {
         if (!animator) animator = GetComponent<Animator>();
         if (!animator) animator = GetComponentInChildren<Animator>();
-        rightRange.transform.parent = null;
-        leftRange.transform.parent = null;
+		if (rightRange.transform.parent != null) 
+		{
+			rightRange.transform.parent = null;
+			leftRange.transform.parent = null;
+		}
+        
         target = leftRange.transform.position.x;
         heightModifier = 1f;
     }
@@ -83,7 +87,6 @@ public class NewMantisScript : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.layer);
         if(collision.gameObject.layer == 8)
         {
             animator.SetTrigger("Attack");
