@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class HoneyCollision : MonoBehaviour
 {
+    GameObject player;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        
+        if (other.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerCharacterControl>().speed = 7f;
-            Destroy(gameObject);
+            player = other.gameObject;
+            Debug.Log(player.tag);
+            player.GetComponent<PlayerCharacterControl>().speed = 7f;
+            Destroy(this);
         }
     }
 }

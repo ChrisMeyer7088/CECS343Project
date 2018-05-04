@@ -83,7 +83,6 @@ public class NewMantisScript : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.layer);
         if(collision.gameObject.layer == 8)
         {
             animator.SetTrigger("Attack");

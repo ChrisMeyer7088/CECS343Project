@@ -13,7 +13,7 @@ using UnityEngine;
         [SerializeField]
         protected Rigidbody2D rigidbody;
         [SerializeField]
-        public float speed = 5f;
+        public float speed;
         float Xscale;
 
         [Header("Raycasting")]
@@ -39,6 +39,7 @@ using UnityEngine;
             if (!animator) animator = GetComponentInChildren<Animator>();
             if (!rigidbody) rigidbody = GetComponent<Rigidbody2D>();
             Xscale = transform.localScale.x;
+            speed = 5;
         }
 
         protected virtual void Update()
