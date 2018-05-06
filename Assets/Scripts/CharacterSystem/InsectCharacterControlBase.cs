@@ -13,7 +13,7 @@ namespace Team343.CharacterSystem
 		[SerializeField]
 		protected Rigidbody2D rigidbody;
 		[SerializeField]
-		private float speed = 5f;
+		public float speed = 5f;
 		float Xscale;
 
 		[Header("Raycasting")]

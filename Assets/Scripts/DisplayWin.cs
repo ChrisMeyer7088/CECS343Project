@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace Team343.CharacterSystem
+{
 public class DisplayWin : MonoBehaviour {
 	public Text winText;
 
@@ -14,6 +16,8 @@ public class DisplayWin : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D player)
 	{
 		Debug.Log ("Collision Detected");
+		Debug.Log (player.tag);
+
 		if (player.gameObject.tag == "Player") {
 			winText.gameObject.SetActive (true);
 			Debug.Log (player.tag);
@@ -28,5 +32,6 @@ public class DisplayWin : MonoBehaviour {
 		Application.LoadLevel (1);
 	}
 		
+}
 }
 			

@@ -2,50 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Team343.CharacterSystem
+{
 public class SpawnManager : MonoBehaviour {
 
-	//public PlayerHealth playerHealth;       // Reference to the player's heatlh.
 	public GameObject spawnObject;                // The enemy prefab to be spawned.
 	public float spawnTime = 3f;            // How long between each spawn. 3 seconds in this case
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
+	public int probability = 10000;
 
 
-	/*void Start ()
+	void Start ()
 	{
+		//	Debug.Log (spawnObject.tag);
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
-		//InvokeRepeating ("Spawn", spawnTime, spawnTime);
-	}*/
+			if (spawnObject.CompareTag ("randSpawn")) {
+			//	Debug.Log ("Works");
+				InvokeRepeating ("Spawn", spawnTime, spawnTime);
+			}
+	}
 
 	void Update()
 	{
-		float rand = Random.Range (0, 100);
-		if (rand == 1) {
-			spawnTime = rand;
-			Spawn ();
-		}
-			
+			if (spawnObject.CompareTag ("probSpawn")) {
+				float rand = Random.Range (0, probability);
+				if (rand == 1)
+					Spawn ();
+			} 
 	}
 
 
-	void Spawn ()
-	{
-		// If the player has no health left...
-	/*	if(playerHealth.currentHealth <= 0f)
-		{
-			// ... exit the function.
-			return;
-		}*/
-			
+	public void Spawn ()
+	{		
 		//Find a random index between zero and one less than the number of spawn points.
 		int spawnPointIndex = Random.Range (0, spawnPoints.Length);
-		//ally.transform.rotation = Quaternion.Euler( 0, Random.Range(0, 360), 0 );
-
-		//transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
-		/*flip = this.gameObject.transform.localScale.x;
-		this.gameObject.transform.localScale.x = -flip; have to find type of variable*/
 
 		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
 		Instantiate (spawnObject, spawnPoints[spawnPointIndex].position, spawnObject.transform.rotation);
 
 	}
+}
 }
