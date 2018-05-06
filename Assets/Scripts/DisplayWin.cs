@@ -13,9 +13,10 @@ public class DisplayWin : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D player)
 	{
-	//	Debug.Log ("Collision Detected");
+		Debug.Log ("Collision Detected");
 		if (player.gameObject.tag == "Player") {
 			winText.gameObject.SetActive (true);
+			Debug.Log (player.tag);
 			StartCoroutine ("WaitForSec");
 		}
 	}
