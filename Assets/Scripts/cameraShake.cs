@@ -22,6 +22,11 @@ public class cameraShake : MonoBehaviour {
 				originRotation.w + Random.Range (-shake_intensity,shake_intensity) * .2f);
 			shake_intensity -= shake_decay;
 		}
+		else
+		{
+			transform.rotation = Quaternion.identity;
+		}
+				
 	}
 
 	//sets variable for the shake in Update()
@@ -32,6 +37,7 @@ public class cameraShake : MonoBehaviour {
 		shake_intensity = .2f;
 		//lower number = longer shake duration
 		shake_decay = 0.01f;
+
 	}
 
 		

@@ -117,7 +117,6 @@ namespace Team343.CharacterSystem
 
 		protected virtual void TransitionStates(CharacterState nextState)
 		{
-			Debug.Log("TRANSITIONING TO: " + nextState);
 			CurrentState = nextState;
 			IsTransitoningState = true;
 		}

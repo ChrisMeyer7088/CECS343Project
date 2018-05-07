@@ -3,35 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Team343.CharacterSystem
 {
 	public class PlayerCharacterControl : InsectCharacterControlBase
 	{
-		public bool speedBoost = false;
-		public bool speedDrag = false;
-		public float slowDuration = 0;
-		public float boostDuration = 0;
+		private Vector3 startingPosition;
+		private bool firstRun = true;
+		Quaternion startingRotation;
+		public GameObject player;
 
 		protected override void DefaultUpdate()
 		{
-			if (speedBoost)
+			if (firstRun) 
 			{
-				boostDuration += Time.deltaTime;
-				if (boostDuration >= 10)
-				{
-					speedBoost = false;
-					speed = 5;
-				}
+				firstRun = false;
+				startingPosition = transform.position;
+				startingRotation = transform.rotation;
 			}
-			if (speedDrag)
+			if (Input.GetKeyDown(KeyCode.Alpha2)) 
 			{
-				slowDuration += Time.deltaTime;
-				if (slowDuration >= 5)
-				{
-					speedDrag = false;
-					speed = 5;
-				}
+				Application.LoadLevel (SceneManager.GetActiveScene().buildIndex);
+				GameObject mainPlayer = (GameObject)Instantiate(player, startingPosition, startingRotation);
+				Destroy (this.gameObject);
+
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha3)) 
+			{
+				Application.LoadLevel (1);
 			}
 			float xAxis = Input.GetAxis("Horizontal");
 			float yAxis = 0;
@@ -61,21 +61,18 @@ namespace Team343.CharacterSystem
 			}
 		}
 
-		void OnCollisionEnter2D(Collision2D other)
+		void OnTriggerEnter2D(Collider2D other)
 		{
-			Debug.Log ("Collision detected");
 			if (other.gameObject.tag == "honey")
 			{
-				speed = 9;
-				boostDuration = 0;
-				speedBoost = true;
+				if(speed < 10)
+					speed += 1;
 				Destroy(other.gameObject);
 			}
 			if (other.gameObject.tag == "poison")
 			{
-				speed = 3;
-				slowDuration = 0;
-				speedDrag = true;
+				if(speed > 3)
+					speed -= 1;
 				Destroy(other.gameObject);
 			}
 		}

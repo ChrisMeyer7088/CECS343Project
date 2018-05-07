@@ -17,9 +17,15 @@ public class SpawnManager : MonoBehaviour {
 		//	Debug.Log (spawnObject.tag);
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
 			if (spawnObject.CompareTag ("randSpawn")) {
-			//	Debug.Log ("Works");
 				InvokeRepeating ("Spawn", spawnTime, spawnTime);
 			}
+	}
+
+	void OnTriggerEnter2D (Collider2D player)
+	{
+		Debug.Log ("Spawning should start now");
+		if (spawnObject.CompareTag ("oneTimeSpawn"))
+			Spawn ();
 	}
 
 	void Update()
@@ -30,7 +36,6 @@ public class SpawnManager : MonoBehaviour {
 					Spawn ();
 			} 
 	}
-
 
 	public void Spawn ()
 	{		

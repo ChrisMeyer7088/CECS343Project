@@ -15,9 +15,6 @@ public class DisplayWin : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D player)
 	{
-		Debug.Log ("Collision Detected");
-		Debug.Log (player.tag);
-
 		if (player.gameObject.tag == "Player") {
 			winText.gameObject.SetActive (true);
 			Debug.Log (player.tag);
@@ -27,7 +24,7 @@ public class DisplayWin : MonoBehaviour {
 
 	IEnumerator WaitForSec()
 	{
-		yield return new WaitForSeconds (4);
+		yield return new WaitForSeconds (3);
 
 		Application.LoadLevel (1);
 	}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewMantisScript : MonoBehaviour {
 
@@ -36,12 +37,17 @@ public class NewMantisScript : MonoBehaviour {
     public float killSpeed = 30;
 
     [Header("Sight")]
-    public float sightDist = 10;
-    private float movingSightDist = 8;
+    public float sightDist = 15;
+    private float movingSightDist = 10;
     public float heightModifier;
+
+	private Vector3 startingPosition;
+	Quaternion startingRotation;
 
     void Start ()
     {
+			startingPosition = transform.position;
+			startingRotation = transform.rotation;
         if (!animator) animator = GetComponent<Animator>();
         if (!animator) animator = GetComponentInChildren<Animator>();
 		if (rightRange.transform.parent != null) 
@@ -56,6 +62,12 @@ public class NewMantisScript : MonoBehaviour {
 
 	void Update ()
     {
+		if (transform.rotation.z < -.60 || transform.rotation.z > .50) 
+		{
+			Instantiate (this, startingPosition, startingRotation);
+			Destroy (this.gameObject);
+		}
+		
         switch (currentState)
         {
             case State.Patrolling:
@@ -87,11 +99,14 @@ public class NewMantisScript : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 8)
+        if(collision.gameObject.layer == 8 || collision.gameObject.layer == 2)
         {
             animator.SetTrigger("Attack");
             currentState = State.Attacking;
             targetObject = collision.gameObject;
+			while (targetObject.transform.parent.gameObject != null) {
+				targetObject = targetObject.transform.parent.gameObject;
+			}
         }
     }
 
@@ -101,7 +116,10 @@ public class NewMantisScript : MonoBehaviour {
         if (timer >= killSpeed)
         {
             currentState = State.Patrolling;
-            obj.active = false;
+			if (obj.tag == "Player")
+				Application.LoadLevel (SceneManager.GetActiveScene().buildIndex);
+			else
+				Destroy (obj);
         }
     }
 
@@ -130,13 +148,11 @@ public class NewMantisScript : MonoBehaviour {
         {
             currentState = State.Chase;
             targetObject = hit.collider.gameObject;
-            Debug.Log("I see you");
         }
         else if(hit2.collider != null)
         {
             currentState = State.Chase;
             targetObject = hit2.collider.gameObject;
-            Debug.Log("I see you");
         }
         Move(new Vector3(0,0,0));
         if(timer >= investigateWait)
